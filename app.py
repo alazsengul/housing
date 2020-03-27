@@ -46,29 +46,23 @@ def run_script():
     query = request.get_json()['query']
     method = request.get_json()['method']
 
-    print(query)
-    print(method)
-
     for i in range(len(group_numbers)):
 
         g = group_numbers[i]
 
         if (method == "lottery") and (str(g["number"]).strip() == str(query)):
-            print("!")
             your_info = g
             before_you = group_numbers[:i]
 
             break
 
         elif (method == "group") and (str(g["id"]).strip() == str(query)):
-            print("!")
             your_info = g
             before_you = group_numbers[:i]
 
             break
 
         elif (method == "uni") and (str(g["id"]).strip() == str(query)):
-            print("!")
             your_info = g
             before_you = group_numbers[:i]
 
@@ -91,9 +85,6 @@ def run_script():
         row.append(totals[str(i + 1)])
 
         result.append(row)
-
-    print(result)
-
 
     return(jsonify(result = result, your_info = your_info))
 
