@@ -1,0 +1,108 @@
+<!-- Created by Alaz Sengul -->
+
+<html>
+
+    <head>
+
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+        <title>Columbia Housing Selection Stats</title>
+
+
+        <style>
+
+        .card {
+            margin-top: 20px;
+        }
+
+        #footer {
+            margin: 0 auto;
+            text-align: center;
+
+            margin-top: 20px;
+        }
+
+        table {
+            margin: 0px !important;
+        }
+
+        </style>
+
+
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+            <span class="navbar-brand mb-0 h1 mx-auto">Columbia Housing Selection Stats</span>
+
+        </nav>
+
+
+        <div id="main" class="container-fluid">
+
+            <div class="row justify-content-center">
+
+                <div class="col-lg-6 col-md-12">
+
+                    <div id="input_card" class="card">
+
+                        <div class="card-body">
+
+                            <label>Use this site as a way to help better plan for your housing selection time. All data was obtained from <a href="https://roomselection.housing.columbia.edu/sites/default/files/content/img/selection/Columbia%20University%20By%20Priority%20Room%20Selection%202020-2021.pdf" target="_blank" class="text-decoration-none">this PDF</a> that Columbia Housing posted. Please reach out if you feel like there's an error, and make sure to share with others!</label>
+
+                            <hr>
+
+                            <label>If you're in a group, enter either your group's lottery number or your group name.</label>
+
+                            <div class="input-group mb-3">
+
+                                <input id="lottery" class="form-control" placeholder="Lottery #"></input>
+                                <input id="group" class="form-control" placeholder="Group name"></input>
+
+                            </div>
+
+                            <label>If you're <b>not</b> in a group, enter your UNI.</label>
+
+                            <div class="input-group mb-3">
+
+                                <div class="input-group-prepend">
+
+                                    <span class="input-group-text">UNI</span>
+
+                                </div>
+
+                                <input input id="uni" class="form-control" placeholder="ab1234"></input>
+
+                            </div>
+
+
+                            <button id="submit" class="btn btn-primary btn-block">See Results</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div id="footer">
+
+            <p>Coded by <a href="mailto:as5456@columbia.edu">Alaz Sengul</a></p>
+
+        </div>
+
+    </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+
+</html>
