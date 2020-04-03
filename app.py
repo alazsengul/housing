@@ -1,5 +1,6 @@
 from flask import Flask, render_template, Response, request, jsonify, url_for
 from collections import Counter
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -20,7 +21,9 @@ with open('group_numbers.csv', 'r') as f:
         else:
             id = split_line[0].strip()
 
-        group_numbers.append({"id": id, "value": split_line[1], "size": split_line[2], "time": split_line[3], "number": split_line[4]})
+        date_time = datetime.strptime(split_line[3], "%m/%d/%y %H:%M")
+
+        group_numbers.append({"id": id, "value": split_line[1], "size": split_line[2], "time": date_time, "number": split_line[4]})
 
 totals = Counter()
 
@@ -51,27 +54,38 @@ def run_script():
         g = group_numbers[i]
 
         if (method == "lottery") and (str(g["number"]).strip() == str(query)):
-            your_info = g
+            your_datetime = g["time"]
+            your_info = g["time"].strftime("%m/%d/%y %H:%M")
             before_you = group_numbers[:i]
 
             break
 
         elif (method == "group") and (str(g["id"]).strip() == str(query)):
-            your_info = g
+            your_datetime = g["time"]
+            your_info = g["time"].strftime("%m/%d/%y %H:%M")
             before_you = group_numbers[:i]
 
             break
 
         elif (method == "uni") and (str(g["id"]).strip() == str(query)):
-            your_info = g
+            your_datetime = g["time"]
+            your_info = g["time"].strftime("%m/%d/%y %H:%M")
             before_you = group_numbers[:i]
 
             break
 
+    right_now = datetime.now()
+
+    if right_now > your_datetime:
+        your_info = "You should've already picked!"
+
     before_you_count = Counter()
 
     for b in before_you:
-        before_you_count[str(b["size"])] += 1
+
+        if b["time"] >= right_now:
+
+            before_you_count[str(b["size"])] += 1
 
 
     result = []

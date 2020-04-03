@@ -7,7 +7,7 @@ var update_site = function(result, your_info) {
     if (your_info.length !== 0) {
 
         var card_body = $("<div>").attr("class", "card-body");
-        var time = $("<p>").attr("class", "card-text text-center").html("Your selection time: " + your_info["time"]);
+        var time = $("<p>").attr("class", "card-text text-center").html("Your selection time: " + your_info);
         card_body.append(time)
 
         var table = $("<table>").attr("class", "table table-hover text-center");
