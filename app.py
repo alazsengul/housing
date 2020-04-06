@@ -87,7 +87,6 @@ def run_script():
 
             before_you_count[str(b["size"])] += 1
 
-
     result = []
 
     for i in range(10):
