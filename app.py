@@ -44,6 +44,8 @@ def index():
 @app.route('/run_script', methods=['GET', 'POST'])
 def run_script():
 
+    result = []
+
     global group_numbers
     global totals
     before_you = []
@@ -51,6 +53,8 @@ def run_script():
 
     query = request.get_json()['query']
     method = request.get_json()['method']
+
+    your_datetime = ""
 
     for i in range(len(group_numbers)):
 
@@ -77,6 +81,10 @@ def run_script():
 
             break
 
+
+    if not your_datetime:
+        return(jsonify(result = result, your_info = ""))
+
     right_now = datetime.now(pytz.timezone('US/Eastern'))
 
     if right_now > your_datetime:
@@ -90,8 +98,6 @@ def run_script():
 
             before_you_count[str(b["size"])] += 1
 
-
-    result = []
 
     for i in range(10):
 
