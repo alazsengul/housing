@@ -83,9 +83,16 @@ def run_script():
 
     for b in before_you:
 
+        print(right_now)
+        print(b["time"])
+
         if b["time"] >= right_now:
+            print("+")
 
             before_you_count[str(b["size"])] += 1
+        else:
+            print("-")
+
 
     result = []
 
