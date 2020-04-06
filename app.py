@@ -1,6 +1,7 @@
 from flask import Flask, render_template, Response, request, jsonify, url_for
 from collections import Counter
 from datetime import datetime
+import pytz
 
 app = Flask(__name__)
 
@@ -22,8 +23,10 @@ with open('group_numbers.csv', 'r') as f:
             id = split_line[0].strip()
 
         date_time = datetime.strptime(split_line[3], "%m/%d/%y %H:%M")
+        timezone = pytz.timezone('US/Eastern')
+        dt_aware = timezone.localize(date_time)
 
-        group_numbers.append({"id": id, "value": split_line[1], "size": split_line[2], "time": date_time, "number": split_line[4]})
+        group_numbers.append({"id": id, "value": split_line[1], "size": split_line[2], "time": dt_aware, "number": split_line[4]})
 
 totals = Counter()
 
@@ -74,7 +77,7 @@ def run_script():
 
             break
 
-    right_now = datetime.now()
+    right_now = datetime.now(pytz.timezone('US/Eastern'))
 
     if right_now > your_datetime:
         your_info = "You should've already picked!"
@@ -83,15 +86,9 @@ def run_script():
 
     for b in before_you:
 
-        print(right_now)
-        print(b["time"])
-
         if b["time"] >= right_now:
-            print("+")
 
             before_you_count[str(b["size"])] += 1
-        else:
-            print("-")
 
 
     result = []
